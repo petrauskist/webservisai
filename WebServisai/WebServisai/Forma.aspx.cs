@@ -35,18 +35,19 @@ namespace WebServisai
             SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Vartotojas\Documents\GitHub\Webservisai\WebServisai\WebServisai\App_Data\Duombaze.mdf;Integrated Security=True");
             conn.Open();
             SqlCommand cmd = new SqlCommand("INSERT INTO Rezultatai VALUES (@v, @r)", conn);
-            cmd.Parameters.AddWithValue("@r", Apsakiciuoti(answers));
+            cmd.Parameters.AddWithValue("@r", Apskaiciuoti(answers));
             cmd.Parameters.AddWithValue("@v", TextBox1.Text);
             cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
-            cmd = new SqlCommand("SELECT COUNT(Rezultatas) * 100 / (SELECT COUNT(Rezultatas) FROM Rezultatai) FROM Rezultatai WHERE Rezultatas = @r", conn);
-            cmd.Parameters.AddWithValue("@r", Apsakiciuoti(answers));
-            Label1.Text = "Jusu charakterio tipas yra:"+ Apsakiciuoti(answers) + " " +  cmd.ExecuteNonQuery() + "% zmoniu gavo ta pati charakterio tipa";
+            cmd = new SqlCommand("SELECT COUNT(Rezultatas) *100 /(SELECT COUNT(*) FROM Rezultatai) FROM Rezultatai WHERE Rezultatas = @r", conn);
+            cmd.Parameters.AddWithValue("@r", Apskaiciuoti(answers));
+            int temp = (Int32) cmd.ExecuteScalar();
+            Label1.Text = "Jusu charakterio tipas yra: "+ Apskaiciuoti(answers) + " " +  temp + "% zmoniu gavo ta pati charakterio tipa";
             cmd.Parameters.Clear();
             conn.Close();
         }
 
-        String Apsakiciuoti(int[] arr)
+        String Apskaiciuoti(int[] arr)
         {
             string str = "";
             int sum = 0;

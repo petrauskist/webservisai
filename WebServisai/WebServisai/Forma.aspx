@@ -2,7 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
-    <form id="form1">
         <label>Iveskite varda</label>
         <asp:TextBox runat="server" ID="TextBox1"></asp:TextBox>
         <div style="margin-top: 62px; margin-left: 43px;">
@@ -129,6 +128,5 @@
 
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="margin-left: 157px; margin-top: 26px" Text="Submit" Width="63px" />
             
-    </form>
     <asp:Label ID="Label1" runat="server"></asp:Label>;
 </asp:Content>
